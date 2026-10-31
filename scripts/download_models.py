@@ -7,7 +7,7 @@ from pathlib import Path
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Descarga explicitamente modelos Hugging Face declarados.")
-    parser.add_argument("model", choices=("multilingual-e5-base", "bge-reranker-v2-m3"))
+    parser.add_argument("model", choices=("multilingual-e5-base", "bge-reranker-v2-m3", "bge-reranker-base"))
     parser.add_argument("--config", type=Path, default=Path("config/resources.local.json"))
     parser.add_argument("--manifest", type=Path, default=Path("manifests/models.json"))
     args = parser.parse_args()

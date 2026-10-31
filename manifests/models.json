@@ -11,12 +11,12 @@
       "integrity_files": ["config.json", "modules.json", "model.safetensors", "tokenizer.json"]
     },
     {
-      "logical_name": "bge-reranker-v2-m3",
-      "repository_id": "BAAI/bge-reranker-v2-m3",
-      "source": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "logical_name": "bge-reranker-base",
+      "repository_id": "BAAI/bge-reranker-base",
+      "source": "https://huggingface.co/BAAI/bge-reranker-base",
       "revision": null,
       "revision_status": "La instantanea local no conserva un commit verificable; fijarlo tras una descarga controlada.",
-      "destination": "models/bge-reranker-v2-m3",
+      "destination": "models/bge-reranker-base",
       "consumers": ["rag-istae-query"],
       "integrity_files": ["config.json", "model.safetensors", "tokenizer.json"]
     },

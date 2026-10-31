@@ -17,7 +17,7 @@ El manifiesto documenta los modelos y consumidores. Para una instalacion vacia, 
 
 ```powershell
 python .\scripts\download_models.py multilingual-e5-base
-python .\scripts\download_models.py bge-reranker-v2-m3
+python .\scripts\download_models.py bge-reranker-base
 ```
 
 No hay descarga implicita desde Ingestion ni Query. Las revisiones de las copias heredadas no son verificables: deben fijarse en `manifests/models.json` despues de una descarga controlada. Los directorios Docling detectados son artefactos del runtime `docling==2.144.0`; su fuente/revision exacta no puede deducirse de forma fiable y no se descarga mediante este script.
