@@ -1,6 +1,6 @@
 # RAG ISTAE Resources
 
-Administra los recursos persistentes compartidos por `rag_istae_ingestion` y `rag-istae-query`. Git versiona solo esta administración (configuración, manifiesto y scripts); `storage/` contiene modelos, corpus, salidas y Qdrant y está excluido.
+Administra los recursos persistentes compartidos por `rag_istae_ingestion` y `rag-istae-query` (`rag-istae-api` no los usa; ver más abajo). Git versiona solo esta administración (configuración, manifiesto y scripts); `storage/` contiene modelos, corpus, salidas y Qdrant y está excluido.
 
 ## Estructura de `storage/`
 
@@ -23,6 +23,14 @@ storage/
 El prefijo `EXT##` / `INT##` del nombre de cada documento se usa como `document_id` durante la ingestión; no renombre los archivos del corpus sin reindexar.
 
 `GOLD STANDARD` no forma parte del corpus consultable; `rag_istae_ingestion` la excluye mediante `exclude_directory_names`.
+
+**`rag-istae-api` no consume `storage/`.** Este backend FastAPI del chat es un repositorio externo y, para este proyecto, de solo lectura. Usa su propia copia en `data/`:
+- `document_mapping.jsonl` y `extracted_text/`, iguales a los de `storage/outputs`;
+- `catalogo_normativo.json`, generado desde `corpus/Matriz_Reglamentos_TESIS_ISTAE_v5.xlsx`.
+
+Si cambian el corpus, la matriz o las salidas de ingestión, esa copia debe regenerarse en ese repositorio. No es necesario mover ni respaldar nada de `storage/` para la API.
+
+`rag-istae-web` (frontend Next.js del chat, externo y de solo lectura) tampoco usa `storage/`: solo se comunica con `rag-istae-api`.
 
 ## Preparación
 
