@@ -21,6 +21,17 @@
       "integrity_files": ["config.json", "model.safetensors", "tokenizer.json"]
     },
     {
+      "logical_name": "bge-reranker-v2-m3",
+      "repository_id": "BAAI/bge-reranker-v2-m3",
+      "source": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "revision": null,
+      "revision_status": "La instantanea local no conserva un commit verificable; fijarlo tras una descarga controlada.",
+      "destination": "models/bge-reranker-v2-m3",
+      "consumers": [],
+      "usage_status": "Reranker anterior de rag-istae-query, reemplazado por bge-reranker-base; se conserva para evaluaciones comparativas.",
+      "integrity_files": ["config.json", "model.safetensors", "tokenizer.json"]
+    },
+    {
       "logical_name": "docling-runtime-models",
       "repository_id": null,
       "source": "Modelos administrados por el runtime Docling 2.144.0 detectados en la cache local.",
