@@ -71,3 +71,20 @@ No hay descarga implícita desde Ingestion ni Query. Las revisiones de las copia
 ## Operación y respaldo
 
 Qdrant local solo admite un proceso a la vez sobre la misma persistencia. Antes de mover o respaldar `vector_store/qdrant`, cierre todo proceso que lo use. No modifique, reconstruya ni copie parcialmente una colección activa. Respalde `storage/` como una unidad consistente. Para trabajar offline, valide previamente los modelos y configure Ingestion/Query con rutas absolutas al almacenamiento ya disponible.
+
+## Paquete de datos para otro equipo
+
+`scripts/build_data_bundle.py` arma una copia **solo con lo que necesita `rag-istae-query`**, para levantar la consulta y el servicio `/retrieve` en otro equipo sin reindexar. Copia sin modificar `storage/`, verifica cada archivo y escribe `MANIFEST.json` (sha256 por archivo) y `LEEME.txt`. Solo usa la biblioteca estándar. Se niega a correr si Qdrant está en uso.
+
+| Incluye | Excluye |
+|---|---|
+| `models/multilingual-e5-base` | corpus y `GOLD STANDARD` |
+| `models/bge-reranker-base`, sin `onnx/` ni `pytorch_model.bin` (duplicados del mismo modelo) | `bge-reranker-v2-m3` y modelos de Docling |
+| `vector_store/qdrant` (sin `.lock`) | resto de `outputs/` (chunks, texto extraído, inventario) |
+| `outputs/units.jsonl` y `catalog/catalogo_normativo.json` | |
+
+```powershell
+python .\scripts\build_data_bundle.py --out E:\rag-istae-paquete --zip
+```
+
+Resultado de la versión **LB1** (2026-11-08): 20 archivos, 2,36 GB, y `rag-istae-storage-LB1.zip` de 1,73 GB, que se comparte por OneDrive. El zip contiene la carpeta raíz `storage/`. Los sha256 de `units.jsonl` y del catálogo coinciden con `index_version` de `GET /health` del servicio. La instalación en el otro equipo se describe en `rag-istae-query/docs/guia_ambiente_local.md`.
